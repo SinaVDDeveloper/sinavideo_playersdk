@@ -38,3 +38,9 @@ bin/AndroidManifest.xml
 bin/res/crunch/drawable-hdpi/btn_retry_play.png
 
 bin/res/crunch/drawable-hdpi/ad_silent_normal.png
+
+bin/res/crunch/drawable-hdpi/ad_silent_press.png
+
+bin/res/crunch/drawable-hdpi/close_tip.png
+
+bin/res/crunch/drawable-hdpi/decoding_setting.png

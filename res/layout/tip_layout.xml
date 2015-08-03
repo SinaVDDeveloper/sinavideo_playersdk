@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/tipLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:background="#0078db"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/media_controller_tip_padding"
+    android:visibility="visible" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/net_tip_icon"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@id/tipMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/media_controller_tip_padding"
+        android:layout_weight="1.0"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@id/btnCloseTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/media_controller_tip_padding"
+        android:background="@drawable/close_tip"
+        android:visibility="visible" />
+
+</LinearLayout>

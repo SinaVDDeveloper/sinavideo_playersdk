@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/play_error_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/media_controller_tip_padding"
+    android:visibility="visible" >
+
+    <RelativeLayout
+        android:id="@+id/play_error_layout_inner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/media_controller_tip_padding" >
+
+        <TextView
+            android:id="@id/tip_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/play_error_tip"
+            android:drawablePadding="8dp"
+            android:text="@string/tip_click_to_replay"
+            android:textColor="#b2666d74"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@id/btn_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tip_message"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/btn_retry_play"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
+
+</RelativeLayout>

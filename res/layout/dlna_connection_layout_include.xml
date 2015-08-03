@@ -1,0 +1,38 @@
+<com.sina.sinavideo.sdk.dlna.DLNALinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/dlna_zhanwei_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/media_controller_tip_padding"
+    android:visibility="gone" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tvicon"
+        android:visibility="visible" />
+
+    <com.sina.sinavideo.sdk.dlna.DLNANameTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#b1b1b1"
+        android:layout_marginTop="5dp"
+        android:textSize="18sp" />
+    <com.sina.sinavideo.sdk.dlna.DLNACloseButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="@string/dlna_switch_to_mobile"
+        android:background="#3399ff"
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:textSize="18sp" />
+
+
+</com.sina.sinavideo.sdk.dlna.DLNALinearLayout>

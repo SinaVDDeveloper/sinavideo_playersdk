@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="sdkPlayListTitle" type="id"/>
+    <item name="sdkResolutionMenu" type="id"/>
+    <item name="tipLayout" type="id"/>
+    <item name="tipMessage" type="id"/>
+    <item name="btnCloseTip" type="id"/>
+    <item name="btn_resolution_3d" type="id"/>
+    <item name="btn_resolution_super" type="id"/>
+    <item name="btn_resolution_high" type="id"/>
+    <item name="btn_resolution_low" type="id"/>
+    <item name="play_error_layout" type="id"/>
+    <item name="tip_message" type="id"/>
+    <item name="btn_replay" type="id"/>
+    <item type="id" name="dlna_list_layout" />
+    <item type="id" name="dlna_list" />
+    <item type="id" name="dlna_zhanwei_layout" />
+    <item type="id" name="btn_dlna_switch" />
+    <item type="id" name="indicater_layer" />
+</resources>

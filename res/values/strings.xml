@@ -1,0 +1,43 @@
+﻿<resources>
+
+    <string name="app_name">sinavideo_playersdk_v2.0</string>
+    <string name="vitamio_init_decoders">Initializing decoders…</string>
+    <string name="vitamio_videoview_error_title">Cannot play video</string>
+    <string name="vitamio_videoview_error_text_invalid_progressive_playback">Sorry, this video is not valid for streaming to
+		this device.</string>
+    <string name="vitamio_videoview_error_text_unknown">Sorry, this video cannot be played.</string>
+    <string name="vitamio_videoview_error_button">OK</string>
+    <string name="mediacontroller_play_pause">Play/Pause</string>
+    <string name="live">直播</string>
+    <string name="buffer_percent_text">正在缓冲</string>
+    <string name="video_loading">正在载入</string>
+    <string name="threed_definition">3D</string>
+    <string name="super_definition">超清</string>
+    <string name="high_definition">高清</string>
+    <string name="base_definition">标清</string>
+    <string name="cif_definition">流畅</string>
+    
+	<string name="network_exception">无网络连接!</string>
+	<string name="network_exist_exception">网络异常!</string>
+	<string name="network_timeout">网络超时!</string>
+	<string name="video_cannot_play">视频无法播放</string>
+	<string name="sorry_video_cannot_play">对不起，该视频暂时无法播放 </string>
+	<string name="net_error_check_net">网络不给力，请您检查网络 </string>
+	<string name="net_no_good_retry">网络不给力，正在为您重连 </string>
+	<string name="net_exp_check_and_retry">网络异常，请您检查网络后重试 </string>
+	<string name="your_net_is_no_good">您的网络不给力</string>
+	<string name="tip_click_to_replay">播放错误，请点击重试。</string>
+    <drawable name="translate">#00000000</drawable>
+    <string name="hard_player">高级播放器</string>
+    <string name="soft_player">兼容播放器</string>
+    <string name="switch_player">切换播放器</string>
+    <string name="play_list">选集</string>
+    
+    <!-- DLNA -->
+	<string name="dlna_switch_to_mobile">切回手机播放</string>
+	<string name="dlna_connect_to_device">已连接至设备:</string>
+	<string name="dlna_please_select_device">请选择列表中的设备</string>
+	<string name="cannot_switch_player">暂时无法切换播放器</string>
+	<string name="dlna">DLNA</string>
+	<string name="sorry_cannot_switch_player">抱歉，该设备无法切换播放器</string>
+</resources>

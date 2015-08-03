@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="VDVideoView">
+        <attr name="layerAttrs" format="reference" />
+        <attr name="canPopupWindow" format="enum">
+            <enum name="rightBottom" value="0" />
+            <enum name="leftBottom" value="1" />
+            <enum name="centerBottom" value="2" />
+        </attr>
+        <attr name="popWindowWidth" format="dimension"></attr>
+        <attr name="popWindowHeight" format="dimension"></attr>
+    </declare-styleable>
+    <declare-styleable name="TimeTextView">
+        <attr name="TimeFormat" format="enum">
+            <enum name="progressduration" value="0" />
+            <enum name="progressonly" value="1" />
+            <enum name="cutdownprogress" value="2" />
+            <enum name="durationonly" value="3" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoRelatedButton">
+        <attr name="listContainer" format="reference" />
+        <attr name="uiControl">
+            <flag name="none" value="1" />
+            <flag name="statusBar" value="2" />
+            <flag name="topContainer" value="4" />
+            <flag name="bottomContainer" value="8" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoPlayListView">
+        <attr name="listItem" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoSoundSeekButton">
+        <attr name="soundSeekContainer" format="reference"></attr>
+        <attr name="soundSeekSilent" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoDefinitionTextView">
+        <attr name="definitionContainer" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoADSoundButton">
+        <attr name="adSoundSeekSilent" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoDecodingButton">
+        <attr name="decodingTypeContainer" format="reference"></attr>
+        <attr name="decodingTypeDialogAdapter" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoControlPanelContainer">
+        <attr name="gestureLevel">
+            <flag name="gestureLevelSingleTap" value="1" />
+            <flag name="gestureLevelDoubleTap" value="2" />
+            <flag name="gestureLevelHorizonScroll" value="4" />
+            <flag name="gestureLevelVerticalScroll" value="8" />
+            <flag name="gestureLevelHorizonScrollLighting" value="16" />
+            <flag name="gestureLevelHorizonScrollSound" value="32" />
+        </attr>
+    </declare-styleable>
+    <!-- 在什么情况下静帧广告出现，1：点暂停时候 2：滑动视频时候 3：转屏时候 4.开始的时候？？ -->
+    <declare-styleable name="VDVideoADFrameContainer">
+        <attr name="adConfig">
+            <flag name="adConfigPause" value="1" />
+            <flag name="adConfigSeek" value="2" />
+            <flag name="adConfigScreenOrientation" value="4" />
+            <flag name="adConfigBegin" value="8" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="ResolutionBackGround">
+        <attr name="unselectTextColor" format="color" />
+        <attr name="selectTextColor" format="color" />
+        <attr name="selectBg" format="reference|color" />
+        <attr name="alignCenter" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="VDVideoSoundSeekImageView">
+        <attr name="muteSrc" format="reference"></attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoLoadingPercentView">
+        <attr name="loadingText" format="string"></attr>
+        <attr name="preLoadingText" format="string"></attr>
+    </declare-styleable>
+    <declare-styleable name="PlayListTextViewColor">
+        <attr name="CurPlayColor" format="color" />
+        <attr name="NoPlayColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="VDVideoLockScreenView">
+        <attr name="LockOpenImg" format="reference"></attr>
+        <attr name="LockCloseImg" format="reference"></attr>
+        <attr name="orientation">
+            <flag name="vertical" value="1" />
+            <flag name="horizontal" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoDecodingView">
+        <attr name="decodingType">
+            <flag name="decodingTypeFFMpeg" value="1" />
+            <flag name="decodingTypeHardware" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="VDVideoControlTopContainer">
+        <attr name="useStatusBar" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="VDVideoPlayStateView">
+        <attr name="playBG" format="reference" />
+        <attr name="pauseBG" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="VDVideoPlayButton">
+        <attr name="playingRes" format="reference" />
+        <attr name="pausedRes" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="VDVideoADTicker">
+        <attr name="tickerImgList" format="reference"></attr>
+        <attr name="tickerTextColor" format="color"></attr>
+        <attr name="tickerTextSize" format="dimension"></attr>
+    </declare-styleable>
+    <!-- 清晰度按钮，四种清晰度选择，根据url不同，自动适配 -->
+    <declare-styleable name="VDVideoResolutionListButton">
+        <attr name="resolutionTag">
+            <flag name="resolutionTagCIF" value="1" />
+            <flag name="resolutionTagSD" value="2" />
+            <flag name="resolutionTagHD" value="3" />
+            <flag name="resolutionTagFHD" value="4" />
+        </attr>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>  
+    
+    <!--  ******************************************  title  ******************************************  -->
+    <!-- title text -->
+    <dimen name="controller_title_title_text_marginRight">16dip</dimen> 
+    
+    <dimen name="controller_title_title_text_size">18sp</dimen> 
+    <dimen name="controller_title_title_text_size2">15sp</dimen> 
+    
+    <!-- favor button -->
+    <dimen name="controller_title_favor_btn_marginRight">25.5dip</dimen> 
+    
+    <!-- share button -->
+    <dimen name="controller_title_share_btn_marginRight">25.5dip</dimen> 
+    
+    <!-- download button -->
+    <dimen name="controller_title_download_btn_marginRight">25.5dip</dimen> 
+    
+    <!-- video list button -->
+    <dimen name="controller_title_video_list_btn_marginRight">10.5dip</dimen> 
+    
+    
+    <!--  ******************************************  bottom  ******************************************  -->
+    <!-- seek bar -->
+    <dimen name="controller_bottom_seekbar_marginLeft">10.5dip</dimen> 
+    <dimen name="controller_bottom_seekbar_marginRight">17.5dip</dimen> 
+    <dimen name="controller_bottom_seekbar_maxHeight">2dip</dimen> 
+    <dimen name="controller_bottom_seekbar_minHeight">2dip</dimen> 
+    
+    <!-- remote play button -->
+    <dimen name="controller_bottom_remote_play_btn_marginRight">20.5dip</dimen> 
+    
+    <!-- resolution button -->
+    <dimen name="controller_bottom_resolution_btn_marginRight">15.5dip</dimen>
+    <dimen name="controller_bottom_resolution_layout_width">60.5dip</dimen>
+    <dimen name="controller_bottom_resolution_textview_width">56.5dip</dimen>
+    <dimen name="controller_bottom_resolution_textview_height">25.5dip</dimen>
+    
+    <dimen name="controller_bottom_resolution_text_size">16.5sp</dimen>
+    
+    <!-- volumn button -->
+    <dimen name="controller_bottom_volumn_btn_marginRight">25.5dip</dimen>
+    
+    <!-- fullscreen button -->
+    <dimen name="controller_bottom_fullscreen_btn_marginRight">9dip</dimen>
+    
+    <!--  ******************************************  right  ******************************************  -->
+    <!-- volumn seek bar -->
+    <dimen name="controller_right_volumn_seekbar_marginRight">12dip</dimen>
+    <dimen name="controller_right_volumn_seekbar_marginTop">15dip</dimen>
+    <dimen name="controller_right_volumn_seekbar_marginBottom">15dip</dimen>
+    <dimen name="controller_right_volumn_seekbar_paddingTop">8dip</dimen>
+    <dimen name="controller_right_volumn_seekbar_paddingBottom">8dip</dimen>
+    
+    <dimen name="controller_right_volumn_seekbar_maxHeight">2dip</dimen>
+    <dimen name="controller_right_volumn_seekbar_minHeight">2dip</dimen>
+    
+    <!-- video list -->
+    <dimen name="controller_video_list_item_text_marginLeft">25dip</dimen> 
+    <dimen name="controller_video_list_item_text_marginRight">12.5dip</dimen>
+    
+    <dimen name="controller_video_grid_item_width">45.5dip</dimen>
+    <dimen name="controller_video_grid_item_height">40.5dip</dimen>
+    
+    <dimen name="controller_video_news_item_width">145.5dip</dimen>
+    <dimen name="controller_video_news_item_height">82dip</dimen>
+    
+    <dimen name="controller_video_adapter_listview_marginTop">8.5dip</dimen>
+    
+    <!-- News -->
+    <dimen name="controller_video_adapter_background">257dp</dimen>
+    
+    <dimen name="controller_video_adapter_live_line_marginLeft">22dip</dimen>
+    <dimen name="controller_video_adapter_live_text_marginLeft">13.5dip</dimen>
+    <dimen name="controller_video_adapter_live_title_marginTop">5dip</dimen>
+    
+    <dimen name="controller_video_adapter_item_marginLeft">13.5dip</dimen>
+    <dimen name="controller_video_adapter_item_marginTop">8.5dip</dimen>
+    <dimen name="controller_video_adapter_item_marginRight">14.5dip</dimen>
+    <dimen name="controller_video_adapter_item_marginBottom">8.5dip</dimen>
+    
+    <dimen name="controller_video_adapter_tv_gridview_hor_space">5.5dip</dimen>
+    <dimen name="controller_video_adapter_tv_gridview_ver_space">10.5dip</dimen>
+    
+    <!-- 网络异常提示 -->
+    <dimen name="media_controller_tip_padding">5.5dip</dimen>
+    <dimen name="media_controller_tip_padding_top">5.5dip</dimen>
+    <dimen name="media_controller_tip_padding_bottom">5.5dip</dimen>
+    
+    <dimen name="indicater_brightness_margin_left">41.5dip</dimen>
+    <dimen name="indicater_sound_margin_right">36.5dip</dimen>
+    
+    <dimen name="btn_padding">3.5dip</dimen>
+</resources> 

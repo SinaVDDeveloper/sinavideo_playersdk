@@ -1,0 +1,34 @@
+<com.sina.sinavideo.sdk.dlna.DLNAListLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/dlna_list_layout"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/dlna_list_bg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:visibility="gone" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#b1b1b1"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/dlna_please_select_device"
+        android:textSize="20sp" />
+	<View android:layout_width="fill_parent"
+	    android:background="#33ffffff"
+        android:layout_height="2px"/>
+    <com.sina.sinavideo.sdk.dlna.DLNAListView
+        android:id="@id/dlna_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="#33ffffff"
+        android:dividerHeight="2px"
+         >
+    </com.sina.sinavideo.sdk.dlna.DLNAListView>
+
+</com.sina.sinavideo.sdk.dlna.DLNAListLinearLayout>
