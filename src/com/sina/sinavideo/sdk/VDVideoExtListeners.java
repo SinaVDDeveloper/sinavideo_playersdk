@@ -1,4 +1,7 @@
+
 package com.sina.sinavideo.sdk;
+
+import java.lang.ref.WeakReference;
 
 import android.content.Context;
 import android.os.Handler;
@@ -44,7 +47,6 @@ public class VDVideoExtListeners {
      * 插入贴片广告全部播放完毕，会回调此接口
      * 
      * @author alexsun
-     * 
      */
     public interface OnVDVideoInsertADEndListener {
 
@@ -102,8 +104,7 @@ public class VDVideoExtListeners {
          * 视频播放结束会调用此接口
          * 
          * @param info
-         * @param status
-         *            一直是0
+         * @param status 一直是0
          */
         public void onVDVideoCompletion(VDVideoInfo info, int status);
     }
@@ -112,7 +113,6 @@ public class VDVideoExtListeners {
      * 软硬解切换通知
      * 
      * @author sunxiao
-     * 
      */
     public interface OnVDVideoPlayerChangeListener {
 
@@ -130,10 +130,8 @@ public class VDVideoExtListeners {
          * 发生错误的时候调用
          * 
          * @param info
-         * @param errWhat
-         *            MEDIA_PLAYER_ERROR_WHAT_*
-         * @param errExtra
-         *            MEDIA_PLAYER_ERROR_EXTRA_*
+         * @param errWhat MEDIA_PLAYER_ERROR_WHAT_*
+         * @param errExtra MEDIA_PLAYER_ERROR_EXTRA_*
          */
         public void onVDVideoError(VDVideoInfo info, int errWhat, int errExtra);
     }
@@ -149,8 +147,7 @@ public class VDVideoExtListeners {
          * 当前视频有信息返回的时候，回调
          * 
          * @param info
-         * @param infWhat
-         *            MEDIA_INFO_WHAT_*
+         * @param infWhat MEDIA_INFO_WHAT_*
          */
         public void onVDVideoInfo(VDVideoInfo info, int infWhat);
     }
@@ -170,27 +167,27 @@ public class VDVideoExtListeners {
         public void onVDVideoPrepared(VDVideoInfo info);
     }
 
-    private OnVDVideoFrameADListener mFrameADListener;
-    private OnVDVideoInsertADListener mInsertADListener;
-    public OnVDVideoPlaylistListener mPlaylistListener;
-    public OnVDPlayerTypeSwitchListener mOnVDPlayerTypeSwitchListener;
-    private OnVDVideoCompletionListener mOnVDVideoCompletionListener;
-    private OnVDVideoErrorListener mOnVDVideoErrorListener;
-    private OnVDVideoInfoListener mOnVDVideoInfoListener;
-    private OnVDVideoPreparedListener mOnVDVideoPreparedListener;
-    private OnVDVideoInsertADEndListener mOnVDVideoInsertADEndListener;
-    private OnVDVideoPlayerChangeListener mOnVDVideoPlayerChangeListener;
+    private WeakReference<OnVDVideoFrameADListener> mFrameADListener;
+    private WeakReference<OnVDVideoInsertADListener> mInsertADListener;
+    public WeakReference<OnVDVideoPlaylistListener> mPlaylistListener;
+    public WeakReference<OnVDPlayerTypeSwitchListener> mOnVDPlayerTypeSwitchListener;
+    private WeakReference<OnVDVideoCompletionListener> mOnVDVideoCompletionListener;
+    private WeakReference<OnVDVideoErrorListener> mOnVDVideoErrorListener;
+    private WeakReference<OnVDVideoInfoListener> mOnVDVideoInfoListener;
+    private WeakReference<OnVDVideoPreparedListener> mOnVDVideoPreparedListener;
+    private WeakReference<OnVDVideoInsertADEndListener> mOnVDVideoInsertADEndListener;
+    private WeakReference<OnVDVideoPlayerChangeListener> mOnVDVideoPlayerChangeListener;
 
     public void setOnVDVideoPlayerChangeListener(OnVDVideoPlayerChangeListener l) {
-        mOnVDVideoPlayerChangeListener = l;
+        mOnVDVideoPlayerChangeListener = new WeakReference<VDVideoExtListeners.OnVDVideoPlayerChangeListener>(l);
     }
 
     public void setOnVDVideoInsertADEndListener(OnVDVideoInsertADEndListener l) {
-        mOnVDVideoInsertADEndListener = l;
+        mOnVDVideoInsertADEndListener = new WeakReference<VDVideoExtListeners.OnVDVideoInsertADEndListener>(l);
     }
 
     public void setOnVDVideoPreparedListener(OnVDVideoPreparedListener l) {
-        mOnVDVideoPreparedListener = l;
+        mOnVDVideoPreparedListener = new WeakReference<VDVideoExtListeners.OnVDVideoPreparedListener>(l);
     }
 
     /**
@@ -199,7 +196,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setFrameADListener(OnVDVideoFrameADListener l) {
-        mFrameADListener = l;
+        mFrameADListener = new WeakReference<VDVideoExtListeners.OnVDVideoFrameADListener>(l);
     }
 
     /**
@@ -208,7 +205,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setInsertADListener(OnVDVideoInsertADListener l) {
-        mInsertADListener = l;
+        mInsertADListener = new WeakReference<VDVideoExtListeners.OnVDVideoInsertADListener>(l);
     }
 
     /**
@@ -217,7 +214,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setPlaylistListener(OnVDVideoPlaylistListener l) {
-        mPlaylistListener = l;
+        mPlaylistListener = new WeakReference<VDVideoExtListeners.OnVDVideoPlaylistListener>(l);
     }
 
     /**
@@ -226,7 +223,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setOnVDPlayerTypeSwitchListener(OnVDPlayerTypeSwitchListener l) {
-        mOnVDPlayerTypeSwitchListener = l;
+        mOnVDPlayerTypeSwitchListener = new WeakReference<VDVideoExtListeners.OnVDPlayerTypeSwitchListener>(l);
     }
 
     /**
@@ -235,7 +232,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setOnVDVideoCompletionListener(OnVDVideoCompletionListener l) {
-        mOnVDVideoCompletionListener = l;
+        mOnVDVideoCompletionListener = new WeakReference<VDVideoExtListeners.OnVDVideoCompletionListener>(l);
     }
 
     /**
@@ -244,7 +241,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setOnVDVideoErrorListener(OnVDVideoErrorListener l) {
-        mOnVDVideoErrorListener = l;
+        mOnVDVideoErrorListener = new WeakReference<VDVideoExtListeners.OnVDVideoErrorListener>(l);
     }
 
     /**
@@ -253,7 +250,7 @@ public class VDVideoExtListeners {
      * @param l
      */
     public void setOnVDVideoInfoListener(OnVDVideoInfoListener l) {
-        mOnVDVideoInfoListener = l;
+        mOnVDVideoInfoListener = new WeakReference<VDVideoExtListeners.OnVDVideoInfoListener>(l);
     }
 
     public void notifyPlayerChange(final int index, final long position) {
@@ -264,8 +261,8 @@ public class VDVideoExtListeners {
                 // TODO Auto-generated method stub
                 if (mOnVDVideoPlayerChangeListener != null) {
                     VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                    if (controller != null) {
-                        mOnVDVideoPlayerChangeListener.OnVDVideoPlayerChangeSwitch(index, position);
+                    if (controller != null && mOnVDVideoPlayerChangeListener.get() != null) {
+                        mOnVDVideoPlayerChangeListener.get().OnVDVideoPlayerChangeSwitch(index, position);
                     }
                 }
             }
@@ -280,8 +277,8 @@ public class VDVideoExtListeners {
                 // TODO Auto-generated method stub
                 if (mOnVDVideoInsertADEndListener != null) {
                     VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                    if (controller != null)
-                        mOnVDVideoInsertADEndListener.onInsertADEnd(controller.getCurrentVideo(), status);
+                    if (controller != null && mOnVDVideoInsertADEndListener.get() != null)
+                        mOnVDVideoInsertADEndListener.get().onInsertADEnd(controller.getCurrentVideo(), status);
                 }
             }
         });
@@ -295,8 +292,8 @@ public class VDVideoExtListeners {
                 // TODO Auto-generated method stub
                 if (mOnVDVideoPreparedListener != null) {
                     VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                    if (controller != null)
-                        mOnVDVideoPreparedListener.onVDVideoPrepared(controller.getCurrentVideo());
+                    if (controller != null && mOnVDVideoPreparedListener.get() != null)
+                        mOnVDVideoPreparedListener.get().onVDVideoPrepared(controller.getCurrentVideo());
                 }
             }
         });
@@ -313,8 +310,8 @@ public class VDVideoExtListeners {
                 // TODO Auto-generated method stub
                 if (mFrameADListener != null) {
                     VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                    if (controller != null)
-                        mFrameADListener.onFrameADPrepared(controller.getCurrentVideo());
+                    if (controller != null && mFrameADListener.get() != null)
+                        mFrameADListener.get().onFrameADPrepared(controller.getCurrentVideo());
                 }
             }
         });
@@ -331,8 +328,8 @@ public class VDVideoExtListeners {
                 // TODO Auto-generated method stub
                 if (mInsertADListener != null) {
                     VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                    if (controller != null)
-                        mInsertADListener.onInsertADClick(controller.getCurrentVideo());
+                    if (controller != null && mInsertADListener.get() != null)
+                        mInsertADListener.get().onInsertADClick(controller.getCurrentVideo());
                 }
             }
         });
@@ -349,8 +346,8 @@ public class VDVideoExtListeners {
                 // TODO Auto-generated method stub
                 if (mInsertADListener != null) {
                     VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                    if (controller != null)
-                        mInsertADListener.onInsertADStepOutClick(controller.getCurrentVideo());
+                    if (controller != null && mInsertADListener.get() != null)
+                        mInsertADListener.get().onInsertADStepOutClick(controller.getCurrentVideo());
                 }
             }
         });
@@ -359,18 +356,16 @@ public class VDVideoExtListeners {
     /**
      * 通知执行播放列表接口回调
      * 
-     * @param info
-     *            当前播放的info
-     * @param p
-     *            正片的序号（不包含贴片广告）
+     * @param info 当前播放的info
+     * @param p 正片的序号（不包含贴片广告）
      */
     public void notifyPlaylistListener(final VDVideoInfo info, final int p) {
         mHandler.post(new Runnable() {
 
             @Override
             public void run() {
-                if (mPlaylistListener != null) {
-                    mPlaylistListener.onPlaylistClick(info, p);
+                if (mPlaylistListener != null && mPlaylistListener.get() != null) {
+                    mPlaylistListener.get().onPlaylistClick(info, p);
                 }
             }
         });
@@ -387,8 +382,8 @@ public class VDVideoExtListeners {
 
             @Override
             public void run() {
-                if (mOnVDPlayerTypeSwitchListener != null) {
-                    mOnVDPlayerTypeSwitchListener.OnVDVideoPlayerTypeSwitch(info, p);
+                if (mOnVDPlayerTypeSwitchListener != null && mOnVDPlayerTypeSwitchListener.get() != null) {
+                    mOnVDPlayerTypeSwitchListener.get().OnVDVideoPlayerTypeSwitch(info, p);
                 }
             }
         });
@@ -400,8 +395,8 @@ public class VDVideoExtListeners {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                if (mOnVDVideoCompletionListener != null) {
-                    mOnVDVideoCompletionListener.onVDVideoCompletion(info, status);
+                if (mOnVDVideoCompletionListener != null && mOnVDVideoCompletionListener.get() != null) {
+                    mOnVDVideoCompletionListener.get().onVDVideoCompletion(info, status);
                 }
             }
         });
@@ -413,8 +408,8 @@ public class VDVideoExtListeners {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                if (mOnVDVideoErrorListener != null) {
-                    mOnVDVideoErrorListener.onVDVideoError(info, errWhat, errExtra);
+                if (mOnVDVideoErrorListener != null && mOnVDVideoErrorListener.get() != null) {
+                    mOnVDVideoErrorListener.get().onVDVideoError(info, errWhat, errExtra);
                 }
             }
         });
@@ -426,8 +421,8 @@ public class VDVideoExtListeners {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                if (mOnVDVideoInfoListener != null) {
-                    mOnVDVideoInfoListener.onVDVideoInfo(info, infWhat);
+                if (mOnVDVideoInfoListener != null && mOnVDVideoInfoListener.get() != null) {
+                    mOnVDVideoInfoListener.get().onVDVideoInfo(info, infWhat);
                 }
             }
         });
@@ -443,13 +438,21 @@ public class VDVideoExtListeners {
      */
     public void clear() {
         mHandler.removeCallbacksAndMessages(null);
-        mFrameADListener = null;
-        mPlaylistListener = null;
-        mOnVDPlayerTypeSwitchListener = null;
-        mOnVDVideoCompletionListener = null;
-        mOnVDVideoErrorListener = null;
-        mOnVDVideoPreparedListener = null;
-        mOnVDVideoInsertADEndListener = null;
-        mOnVDVideoPlayerChangeListener = null;
+        if (mFrameADListener != null)
+            mFrameADListener.clear();
+        if (mPlaylistListener != null)
+            mPlaylistListener.clear();
+        if (mOnVDPlayerTypeSwitchListener != null)
+            mOnVDPlayerTypeSwitchListener.clear();
+        if (mOnVDVideoCompletionListener != null)
+            mOnVDVideoCompletionListener.clear();
+        if (mOnVDVideoErrorListener != null)
+            mOnVDVideoErrorListener.clear();
+        if (mOnVDVideoPreparedListener != null)
+            mOnVDVideoPreparedListener.clear();
+        if (mOnVDVideoInsertADEndListener != null)
+            mOnVDVideoInsertADEndListener.clear();
+        if (mOnVDVideoPlayerChangeListener != null)
+            mOnVDVideoPlayerChangeListener.clear();
     }
 }
