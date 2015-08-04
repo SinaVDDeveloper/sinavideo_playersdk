@@ -44,3 +44,17 @@ bin/res/crunch/drawable-hdpi/ad_silent_press.png
 bin/res/crunch/drawable-hdpi/close_tip.png
 
 bin/res/crunch/drawable-hdpi/decoding_setting.png
+
+copy_branch_to_release.sh
+
+doc/解码规范/新浪/解码标准.docx
+
+doc/解码规范/tencent/安卓竞品设备对应清晰度规则.doc
+
+doc/解码规范/tencent/腾讯视频直播推流规范.docx
+
+doc/用户手册/播放器层次结构图.graffle
+
+gen/com/sina/video_playersdkv2/BuildConfig.java
+
+gen/com/sina/video_playersdkv2/R.java
