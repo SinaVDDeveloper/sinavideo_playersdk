@@ -1,4 +1,3 @@
-
 package com.sina.sinavideo.sdk.container;
 
 import android.annotation.SuppressLint;
@@ -29,243 +28,324 @@ import com.sina.video_playersdkv2.R;
  */
 public class VDVideoControlPanelContainer extends View implements VDBaseWidget {
 
-    @SuppressWarnings("unused")
-    private Context mContext = null;
+	@SuppressWarnings("unused")
+	private Context mContext = null;
 
-    private GestureDetector mGestureDetector = null;
-    private VDVideoControlPanelGesture mVDVideoControlPanelGesture = null;
-    private final static String TAG = "VDVideoControlPanelLayout";
-    private int mLevel = -1;
-    private boolean mIsVertical = false;
-    private boolean mIsHorinzontal = false;
-    private boolean mIsScrolling = false;
-    private PointF mPrePoint = new PointF();
+	private GestureDetector mGestureDetector = null;
+	private VDVideoControlPanelGesture mVDVideoControlPanelGesture = null;
+	private final static String TAG = "VDVideoControlPanelLayout";
+	private int mLevel = -1;
+	private boolean mIsVertical = false;
+	private boolean mIsHorinzontal = false;
+	private boolean mIsScrolling = false;
+	private PointF mPrePoint = new PointF();
 
-    private boolean mOperationExecuting = false;
-    private eVerticalScrollTouchListener eFlag;
+	private boolean mOperationExecuting = false;
+	private eVerticalScrollTouchListener eFlag;
 
-    public VDVideoControlPanelContainer(Context context) {
-        super(context);
-        init(context, (8 | 4 | 2 | 1));
-    }
+	public final int GESTURELEVELSINGLETAP = 1;
+	public final int GESTURELEVELDOUBLETAP = 2;
+	public final int GESTURELEVELHORIZONSCROLL = 4;
+	public final int GESTURELEVELVERTICALSCROLL = 8;
+	public final int GESTURELEVELHORIZONSCROLLLIGHTING = 16;
+	public final int GESTURELEVELHORIZONSCROLLSOUND = 32;
 
-    public VDVideoControlPanelContainer(Context context, AttributeSet attrs) {
-        super(context, attrs);
+	public VDVideoControlPanelContainer(Context context) {
+		super(context);
+		// 直接使用控件的话，就默认全支持
+		init(context,
+				(GESTURELEVELVERTICALSCROLL | GESTURELEVELHORIZONSCROLL
+						| GESTURELEVELDOUBLETAP | GESTURELEVELSINGLETAP
+						| GESTURELEVELHORIZONSCROLLLIGHTING | GESTURELEVELHORIZONSCROLLSOUND));
+	}
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.VDVideoControlPanelContainer);
-        for (int i = 0; i < typedArray.getIndexCount(); i++) {
-            if (typedArray.getIndex(i) == R.styleable.VDVideoControlPanelContainer_gestureLevel) {
-                mLevel = typedArray.getInt(i, -1);
-            }
-            // switch (typedArray.getIndex(i)) {
-            // default :
-            // break;
-            // case R.styleable.VDVideoControlPanelContainer_gestureLevel :
-            // mLevel = typedArray.getInt(i, -1);
-            // break;
-            // }
-        }
-        typedArray.recycle();
+	public VDVideoControlPanelContainer(Context context, AttributeSet attrs) {
+		super(context, attrs);
 
-        init(context, mLevel);
-    }
+		int level = -1;
+		TypedArray typedArray = context.obtainStyledAttributes(attrs,
+				R.styleable.VDVideoControlPanelContainer);
+		for (int i = 0; i < typedArray.getIndexCount(); i++) {
+			if (typedArray.getIndex(i) == R.styleable.VDVideoControlPanelContainer_gestureLevel) {
+				level = typedArray.getInt(i, -1);
+			}
+		}
+		typedArray.recycle();
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        // TODO Auto-generated method stub
-        return super.dispatchKeyEvent(event);
-    }
+		// if (level == -1) {
+		// level = (GESTURELEVELVERTICALSCROLL | GESTURELEVELHORIZONSCROLL
+		// | GESTURELEVELDOUBLETAP | GESTURELEVELSINGLETAP
+		// | GESTURELEVELHORIZONSCROLLLIGHTING |
+		// GESTURELEVELHORIZONSCROLLSOUND);
+		// }
 
-    private void init(Context context, int level) {
-        mContext = context;
-        mVDVideoControlPanelGesture = new VDVideoControlPanelGesture(context, level);
-        mGestureDetector = new GestureDetector(context, mVDVideoControlPanelGesture);
-        mGestureDetector.setIsLongpressEnabled(false);
-    }
+		init(context, level);
+	}
 
-    private class VDVideoControlPanelGesture extends SimpleOnGestureListener {
+	public void mergeLevel(int level) {
+		mLevel |= level;
+	}
 
-        private Context mContext;
+	private boolean checkLevel(int level) {
+		if (mLevel < 0) {
+			return false;
+		}
+		return ((mLevel & level) == level);
+	}
 
-        public VDVideoControlPanelGesture(Context context, int level) {
-            mContext = context;
-        }
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		// TODO Auto-generated method stub
+		return super.dispatchKeyEvent(event);
+	}
 
-        @Override
-        public boolean onDown(MotionEvent e) {
-            VDLog.e(TAG, "onDown");
-            mPrePoint = new PointF();
-            // mPrePoint.set(e.getRawX(), e.getRawY());
-            return true;
-        }
+	private void init(Context context, int level) {
+		mContext = context;
+		mLevel = level;
 
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            handleDoubleTap(e);
-            VDLog.e(TAG, "onDoubleTap");
-            return super.onDoubleTap(e);
-        }
+		mVDVideoControlPanelGesture = new VDVideoControlPanelGesture(context,
+				level);
+		mGestureDetector = new GestureDetector(context,
+				mVDVideoControlPanelGesture);
+		mGestureDetector.setIsLongpressEnabled(false);
+	}
 
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            handleSingleTap(e);
-            VDLog.e(TAG, "onSingleTapConfirmed");
-            DLNAEventListener.getInstance().notifyDLNAListHide();
-            return super.onSingleTapConfirmed(e);
-        }
+	private class VDVideoControlPanelGesture extends SimpleOnGestureListener {
 
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            if (mPrePoint.equals(0.f, 0.f)) {
-                mPrePoint.set(e1.getRawX(), e1.getRawY());
-            }
-            if (!mOperationExecuting) { // 滑动操作正在执行锁定其方向判断
-                int fromDownX = (int) (e2.getX() - e1.getX());
-                int fromDownY = (int) (e1.getY() - e2.getY());
-                if (Math.abs(fromDownY) > 10F && Math.abs(fromDownY) > Math.abs(fromDownX)) {
-                    mIsVertical = true;
-                    mOperationExecuting = true;
-                    if (mLevel > 0) {
-                        VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                        if (controller != null)
-                            controller.touchScreenVerticalScrollEvent(new PointF(mPrePoint.x, mPrePoint.y), new PointF(
-                                    e2.getRawX(), e2.getRawY()), new PointF(e1.getRawX(), e1.getRawY()),
-                                    eVerticalScrollTouchListener.eTouchListenerVerticalScrollStart, distanceY);
-                    }
-                    if ((mLevel & 8) == 8) {
-                        // 竖直滑动
-                        eFlag = eVerticalScrollTouchListener.eTouchListenerVerticalScroll;
-                    } else if ((mLevel & 16) == 16) {
-                        eFlag = eVerticalScrollTouchListener.eTouchListenerVerticalScrollLighting;
-                    } else if ((mLevel & 32) == 32) {
-                        eFlag = eVerticalScrollTouchListener.eTouchListenerVerticalScrollSound;
-                    }
-                } else if (Math.abs(fromDownX) > 10F && Math.abs(fromDownX) > Math.abs(fromDownY)) {
-                    mIsHorinzontal = true;
-                    mOperationExecuting = true;
-                    if (mLevel > 0) {
-                        VDVideoViewController controller = VDVideoViewController.getInstance(mContext);
-                        if (controller != null)
-                            controller.touchScreenHorizonScrollEvent(new PointF(mPrePoint.x, mPrePoint.y), new PointF(
-                                    e2.getRawX(), e2.getRawY()), new PointF(e1.getRawX(), e1.getRawY()),
-                                    eHorizonScrollTouchListener.eTouchListenerHorizonScrollStart);
-                    }
-                }
-            } else if (mIsVertical) {
-                handleVerticalScroll(new PointF(mPrePoint.x, mPrePoint.y), new PointF(e2.getRawX(), e2.getRawY()),
-                        new PointF(e1.getRawX(), e1.getRawY()), distanceY);
-            } else if (mIsHorinzontal) {
-                handleHorizonScroll(new PointF(mPrePoint.x, mPrePoint.y), new PointF(e2.getRawX(), e2.getRawY()),
-                        new PointF(e1.getRawX(), e1.getRawY()));
-            }
-            mIsScrolling = true;
-            mPrePoint.set(e2.getRawX(), e2.getRawY());
+		private Context mContext;
 
-            return super.onScroll(e1, e2, distanceX, distanceY);
-        }
-    }
+		public VDVideoControlPanelGesture(Context context, int level) {
+			mContext = context;
+		}
 
-    @Override
-    public void reset() {
-        // TODO Auto-generated method stub
-    }
+		@Override
+		public boolean onDown(MotionEvent e) {
+			VDLog.e(TAG, "onDown");
+			mPrePoint = new PointF();
+			// mPrePoint.set(e.getRawX(), e.getRawY());
+			return true;
+		}
 
-    @Override
-    public void hide() {
-        // TODO Auto-generated method stub
-    }
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			handleDoubleTap(e);
+			VDLog.e(TAG, "onDoubleTap");
+			return super.onDoubleTap(e);
+		}
 
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			handleSingleTap(e);
+			VDLog.e(TAG, "onSingleTapConfirmed");
+			DLNAEventListener.getInstance().notifyDLNAListHide();
+			return super.onSingleTapConfirmed(e);
+		}
 
-        if (mGestureDetector.onTouchEvent(event)) {
-            return true;
-        }
-        if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
-            if (mIsScrolling) {
-                if (mIsVertical) {
-                    handleVerticalScrollFinish(null, null, new PointF(event.getRawX(), event.getRawY()), 0);
-                } else if (mIsHorinzontal) {
-                    handleHorizonScrollFinish(new PointF(mPrePoint.x, mPrePoint.y),
-                            new PointF(event.getRawX(), event.getRawY()), new PointF(event.getRawX(), event.getRawY()));
-                }
-                mIsScrolling = false;
-                VDLog.e(TAG, "ACTION_UP");
-            }
-            mIsVertical = false;
-            mIsHorinzontal = false;
-            mOperationExecuting = false;
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2,
+				float distanceX, float distanceY) {
+			if (mPrePoint.equals(0.f, 0.f)) {
+				mPrePoint.set(e1.getRawX(), e1.getRawY());
+			}
+			if (!mOperationExecuting) { // 滑动操作正在执行锁定其方向判断
+				int fromDownX = (int) (e2.getX() - e1.getX());
+				int fromDownY = (int) (e1.getY() - e2.getY());
+				if (Math.abs(fromDownY) > 10F
+						&& Math.abs(fromDownY) > Math.abs(fromDownX)) {
+					mIsVertical = true;
+					mOperationExecuting = true;
+					if (checkLevel(GESTURELEVELVERTICALSCROLL)) {
+						VDVideoViewController controller = VDVideoViewController
+								.getInstance(mContext);
+						if (controller != null)
+							controller
+									.touchScreenVerticalScrollEvent(
+											new PointF(mPrePoint.x, mPrePoint.y),
+											new PointF(e2.getRawX(), e2
+													.getRawY()),
+											new PointF(e1.getRawX(), e1
+													.getRawY()),
+											eVerticalScrollTouchListener.eTouchListenerVerticalScrollStart,
+											distanceY);
+					}
+					if (checkLevel(GESTURELEVELVERTICALSCROLL)) {
+						// 竖直滑动
+						eFlag = eVerticalScrollTouchListener.eTouchListenerVerticalScroll;
+					} else if (checkLevel(GESTURELEVELHORIZONSCROLLLIGHTING)) {
+						// 亮度调整
+						eFlag = eVerticalScrollTouchListener.eTouchListenerVerticalScrollLighting;
+					} else if (checkLevel(GESTURELEVELHORIZONSCROLLSOUND)) {
+						// 声音调整
+						eFlag = eVerticalScrollTouchListener.eTouchListenerVerticalScrollSound;
+					}
+				} else if (Math.abs(fromDownX) > 10F
+						&& Math.abs(fromDownX) > Math.abs(fromDownY)) {
+					mIsHorinzontal = true;
+					mOperationExecuting = true;
+					if (checkLevel(GESTURELEVELHORIZONSCROLL)) {
+						VDVideoViewController controller = VDVideoViewController
+								.getInstance(mContext);
+						if (controller != null)
+							controller
+									.touchScreenHorizonScrollEvent(
+											new PointF(mPrePoint.x, mPrePoint.y),
+											new PointF(e2.getRawX(), e2
+													.getRawY()),
+											new PointF(e1.getRawX(), e1
+													.getRawY()),
+											eHorizonScrollTouchListener.eTouchListenerHorizonScrollStart);
+					}
+				}
+			} else if (mIsVertical) {
+				handleVerticalScroll(new PointF(mPrePoint.x, mPrePoint.y),
+						new PointF(e2.getRawX(), e2.getRawY()),
+						new PointF(e1.getRawX(), e1.getRawY()), distanceY);
+			} else if (mIsHorinzontal) {
+				handleHorizonScroll(new PointF(mPrePoint.x, mPrePoint.y),
+						new PointF(e2.getRawX(), e2.getRawY()),
+						new PointF(e1.getRawX(), e1.getRawY()));
+			}
+			mIsScrolling = true;
+			mPrePoint.set(e2.getRawX(), e2.getRawY());
 
-        }
-        return false;
-    }
+			return super.onScroll(e1, e2, distanceX, distanceY);
+		}
+	}
 
-    private void handleSingleTap(MotionEvent e) {
-        VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-        if (controller == null)
-            return;
-        if (mLevel >= 0) {
-            controller.touchScreenSingleEvent(e, eSingleTouchListener.eTouchListenerSingleTouchStart);
-        }
-        if ((mLevel & 1) == 1) {
-            controller.touchScreenSingleEvent(e, eSingleTouchListener.eTouchListenerSingleTouch);
-        }
-        if (mLevel > 0) {
-            controller.touchScreenSingleEvent(e, eSingleTouchListener.eTouchListenerSingleTouchEnd);
-        }
-    }
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+	}
 
-    private void handleDoubleTap(MotionEvent e) {
-        VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-        if (controller == null) {
-            return;
-        }
-        if (mLevel >= 0) {
-            controller.touchScreenDoubleEvent(e, eDoubleTouchListener.eTouchListenerDoubleTouchStart);
-        }
-        if ((mLevel & 2) == 2) {
-            controller.touchScreenDoubleEvent(e, eDoubleTouchListener.eTouchListenerDoubleTouch);
-        }
-        if (mLevel > 0) {
-            controller.touchScreenDoubleEvent(e, eDoubleTouchListener.eTouchListenerDoubleTouchEnd);
-        }
-    }
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+	}
 
-    private void handleVerticalScroll(final PointF point1, final PointF point2, final PointF beginPoint, float distansY) {
-        if (eFlag != null) {
-            VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-            if (controller != null)
-                controller.touchScreenVerticalScrollEvent(point1, point2, beginPoint, eFlag, distansY);
-        }
-    }
+	@SuppressLint("ClickableViewAccessibility")
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
 
-    private void handleVerticalScrollFinish(final PointF point1, final PointF point2, final PointF beginPoint,
-            float distansY) {
-        if (mLevel > 0) {
-            VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-            if (controller != null)
-                controller.touchScreenVerticalScrollEvent(point1, point2, beginPoint,
-                        eVerticalScrollTouchListener.eTouchListenerVerticalScrollEnd, distansY);
-        }
-    }
+		if (mGestureDetector.onTouchEvent(event)) {
+			return true;
+		}
+		if (event.getAction() == MotionEvent.ACTION_UP
+				|| event.getAction() == MotionEvent.ACTION_CANCEL) {
+			if (mIsScrolling) {
+				if (mIsVertical) {
+					handleVerticalScrollFinish(null, null,
+							new PointF(event.getRawX(), event.getRawY()), 0);
+				} else if (mIsHorinzontal) {
+					handleHorizonScrollFinish(new PointF(mPrePoint.x,
+							mPrePoint.y),
+							new PointF(event.getRawX(), event.getRawY()),
+							new PointF(event.getRawX(), event.getRawY()));
+				}
+				mIsScrolling = false;
+				VDLog.e(TAG, "ACTION_UP");
+			}
+			mIsVertical = false;
+			mIsHorinzontal = false;
+			mOperationExecuting = false;
 
-    private void handleHorizonScroll(final PointF point1, final PointF point2, final PointF beginPoint) {
-        if ((mLevel & 4) == 4) {
-            VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-            if (controller != null)
-                controller.touchScreenHorizonScrollEvent(point1, point2, beginPoint,
-                        eHorizonScrollTouchListener.eTouchListenerHorizonScroll);
-        }
-    }
+		}
+		return false;
+	}
 
-    private void handleHorizonScrollFinish(final PointF point1, final PointF point2, final PointF beginPoint) {
-        if (mLevel > 0) {
-            VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-            if (controller != null)
-                controller.touchScreenHorizonScrollEvent(point1, point2, beginPoint,
-                        eHorizonScrollTouchListener.eTouchListenerHorizonScrollEnd);
-        }
-    }
+	private void handleSingleTap(MotionEvent e) {
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (controller == null)
+			return;
+		if (checkLevel(GESTURELEVELSINGLETAP)) {
+			controller.touchScreenSingleEvent(e,
+					eSingleTouchListener.eTouchListenerSingleTouchStart);
+		}
+		if (checkLevel(GESTURELEVELSINGLETAP)) {
+			controller.touchScreenSingleEvent(e,
+					eSingleTouchListener.eTouchListenerSingleTouch);
+		}
+		if (checkLevel(GESTURELEVELSINGLETAP)) {
+			controller.touchScreenSingleEvent(e,
+					eSingleTouchListener.eTouchListenerSingleTouchEnd);
+		}
+	}
+
+	private void handleDoubleTap(MotionEvent e) {
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (controller == null) {
+			return;
+		}
+		if (checkLevel(GESTURELEVELDOUBLETAP)) {
+			controller.touchScreenDoubleEvent(e,
+					eDoubleTouchListener.eTouchListenerDoubleTouchStart);
+		}
+		if (checkLevel(GESTURELEVELDOUBLETAP)) {
+			controller.touchScreenDoubleEvent(e,
+					eDoubleTouchListener.eTouchListenerDoubleTouch);
+		}
+		if (checkLevel(GESTURELEVELDOUBLETAP)) {
+			controller.touchScreenDoubleEvent(e,
+					eDoubleTouchListener.eTouchListenerDoubleTouchEnd);
+		}
+	}
+
+	private void handleVerticalScroll(final PointF point1, final PointF point2,
+			final PointF beginPoint, float distansY) {
+		if (checkLevel(GESTURELEVELVERTICALSCROLL)) {
+			VDVideoViewController controller = VDVideoViewController
+					.getInstance(this.getContext());
+			if (controller != null)
+				controller.touchScreenVerticalScrollEvent(point1, point2,
+						beginPoint, eFlag, distansY);
+		}
+	}
+
+	private void handleVerticalScrollFinish(final PointF point1,
+			final PointF point2, final PointF beginPoint, float distansY) {
+		if (checkLevel(GESTURELEVELVERTICALSCROLL)) {
+			VDVideoViewController controller = VDVideoViewController
+					.getInstance(this.getContext());
+			if (controller != null)
+				controller
+						.touchScreenVerticalScrollEvent(
+								point1,
+								point2,
+								beginPoint,
+								eVerticalScrollTouchListener.eTouchListenerVerticalScrollEnd,
+								distansY);
+		}
+	}
+
+	private void handleHorizonScroll(final PointF point1, final PointF point2,
+			final PointF beginPoint) {
+		if (checkLevel(GESTURELEVELHORIZONSCROLL)) {
+			VDVideoViewController controller = VDVideoViewController
+					.getInstance(this.getContext());
+			if (controller != null)
+				controller
+						.touchScreenHorizonScrollEvent(
+								point1,
+								point2,
+								beginPoint,
+								eHorizonScrollTouchListener.eTouchListenerHorizonScroll);
+		}
+	}
+
+	private void handleHorizonScrollFinish(final PointF point1,
+			final PointF point2, final PointF beginPoint) {
+		if (checkLevel(GESTURELEVELHORIZONSCROLL)) {
+			VDVideoViewController controller = VDVideoViewController
+					.getInstance(this.getContext());
+			if (controller != null)
+				controller
+						.touchScreenHorizonScrollEvent(
+								point1,
+								point2,
+								beginPoint,
+								eHorizonScrollTouchListener.eTouchListenerHorizonScrollEnd);
+		}
+	}
 
 }
