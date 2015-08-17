@@ -19,132 +19,136 @@ import com.sina.video_playersdkv2.R;
  * @author liuqun
  * 
  */
-public class VDVideoResolutionList extends LinearLayout implements VDBaseWidget, OnShowHideControllerListener,
-        OnScreenTouchListener, OnResolutionContainerListener {
+public final class VDVideoResolutionList extends LinearLayout implements
+		VDBaseWidget, OnShowHideControllerListener, OnScreenTouchListener,
+		OnResolutionContainerListener {
 
-    String tag = "VDVideoResolutionList";
+	String tag = "VDVideoResolutionList";
 
-    public VDVideoResolutionList(Context context) {
-        super(context);
-        init();
-    }
+	public VDVideoResolutionList(Context context) {
+		super(context);
+		init();
+	}
 
-    public VDVideoResolutionList(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ResolutionBackGround);
-        a.recycle();
-    }
+	public VDVideoResolutionList(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+		TypedArray a = context.obtainStyledAttributes(attrs,
+				R.styleable.ResolutionBackGround);
+		a.recycle();
+	}
 
-    private void init() {
-        setBackgroundResource(R.drawable.definition_select_bg);
-    }
+	private void init() {
+		setBackgroundResource(R.drawable.definition_select_bg);
+	}
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-    }
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+	}
 
-    @Override
-    public void reset() {
-        VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-        if (controller != null) {
-            // controller.addOnResolutionListener(this);
-            controller.addOnResolutionContainerListener(this);
-            controller.addOnScreenTouchListener(this);
-            controller.addOnShowHideControllerListener(this);
-        }
-    }
+	@Override
+	public void reset() {
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (controller != null) {
+			// controller.addOnResolutionListener(this);
+			controller.addOnResolutionContainerListener(this);
+			controller.addOnScreenTouchListener(this);
+			controller.addOnShowHideControllerListener(this);
+		}
+	}
 
-    @Override
-    public void hide() {
-        this.setVisibility(View.GONE);
-        VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-        if (controller != null) {
-            // controller.removeOnResolutionListener(this);
-            controller.removeOnResolutionContainerListener(this);
-            controller.removeOnScreenTouchListener(this);
-            controller.removeOnShowHideControllerListener(this);
-        }
-    }
+	@Override
+	public void hide() {
+		this.setVisibility(View.GONE);
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (controller != null) {
+			// controller.removeOnResolutionListener(this);
+			controller.removeOnResolutionContainerListener(this);
+			controller.removeOnScreenTouchListener(this);
+			controller.removeOnShowHideControllerListener(this);
+		}
+	}
 
-    // public void setResolutionList(VDResolutionData resolutionData) {
-    // Log.i(tag, "setResolutionList --> " + resolutionData.toString());
-    // if (resolutionData != null) {
-    //
-    // }
-    // }
+	// public void setResolutionList(VDResolutionData resolutionData) {
+	// Log.i(tag, "setResolutionList --> " + resolutionData.toString());
+	// if (resolutionData != null) {
+	//
+	// }
+	// }
 
-    @Override
-    public void onSingleTouch(MotionEvent ev) {
-        setVisibility(GONE);
-    }
+	@Override
+	public void onSingleTouch(MotionEvent ev) {
+		setVisibility(GONE);
+	}
 
-    // @Override
-    // public void onResolutionSelect(String resolution) {
-    // Log.i(tag, "onResolutionSelect -> " + resolution);
-    // if (resolution != null) {
-    //
-    // }
-    // }
+	// @Override
+	// public void onResolutionSelect(String resolution) {
+	// Log.i(tag, "onResolutionSelect -> " + resolution);
+	// if (resolution != null) {
+	//
+	// }
+	// }
 
-    // @Override
-    // public void onParseResolution(VDResolutionData list) {
-    // setResolutionList(list);
-    // }
+	// @Override
+	// public void onParseResolution(VDResolutionData list) {
+	// setResolutionList(list);
+	// }
 
-    // @Override
-    // public void hideResolution() {
-    // setVisibility(GONE);
-    // }
+	// @Override
+	// public void hideResolution() {
+	// setVisibility(GONE);
+	// }
 
-    public void focusFirstView() {
-        // mResolutionButtonBase.requestFocus();
-    }
+	public void focusFirstView() {
+		// mResolutionButtonBase.requestFocus();
+	}
 
-    @Override
-    public void doNotHideControllerBar() {
+	@Override
+	public void doNotHideControllerBar() {
 
-    }
+	}
 
-    @Override
-    public void hideControllerBar(long delay) {
-    }
+	@Override
+	public void hideControllerBar(long delay) {
+	}
 
-    @Override
-    public void showControllerBar(boolean delayHide) {
+	@Override
+	public void showControllerBar(boolean delayHide) {
 
-    }
+	}
 
-    @Override
-    public void onPostHide() {
-        setVisibility(View.GONE);
-    }
+	@Override
+	public void onPostHide() {
+		setVisibility(View.GONE);
+	}
 
-    @Override
-    public void onPostShow() {
+	@Override
+	public void onPostShow() {
 
-    }
+	}
 
-    @Override
-    public void onPreHide() {
-        setVisibility(View.GONE);
-    }
+	@Override
+	public void onPreHide() {
+		setVisibility(View.GONE);
+	}
 
-    @Override
-    public void onPreShow() {
-        // TODO Auto-generated method stub
+	@Override
+	public void onPreShow() {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    @Override
-    public void onResolutionContainerVisible(boolean isVisible) {
-        // TODO Auto-generated method stub
-        if (isVisible) {
-            setVisibility(View.VISIBLE);
-        } else {
-            setVisibility(View.GONE);
-        }
-    }
+	@Override
+	public void onResolutionContainerVisible(boolean isVisible) {
+		// TODO Auto-generated method stub
+		if (isVisible) {
+			setVisibility(View.VISIBLE);
+		} else {
+			setVisibility(View.GONE);
+		}
+	}
 
 }

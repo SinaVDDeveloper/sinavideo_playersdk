@@ -23,7 +23,7 @@ import android.widget.TextView;
  * @author alexsun
  * 
  */
-public class VDVideoResolutionListButton extends TextView implements
+public final class VDVideoResolutionListButton extends TextView implements
 		VDBaseWidget, OnResolutionListButtonListener, OnResolutionListener {
 
 	private Context mContext = null;

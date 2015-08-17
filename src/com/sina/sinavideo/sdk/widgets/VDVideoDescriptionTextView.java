@@ -14,54 +14,58 @@ import com.sina.sinavideo.sdk.data.VDVideoInfo;
  * @author liuqun
  * 
  */
-public class VDVideoDescriptionTextView extends TextView implements VDBaseWidget,
-        VDVideoViewListeners.OnPlayVideoListener {
+public final class VDVideoDescriptionTextView extends TextView implements
+		VDBaseWidget, VDVideoViewListeners.OnPlayVideoListener {
 
-    public VDVideoDescriptionTextView(Context context) {
-        super(context);
-    }
+	public VDVideoDescriptionTextView(Context context) {
+		super(context);
+	}
 
-    public VDVideoDescriptionTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+	public VDVideoDescriptionTextView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
 
-    @Override
-    public void reset() {
-        // TODO Auto-generated method stub
-    	VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-    	if(null!=controller)controller.addOnPlayVideoListener(this);
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (null != controller)
+			controller.addOnPlayVideoListener(this);
 
-    }
+	}
 
-    @Override
-    public void hide() {
-        // TODO Auto-generated method stub
-    	VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-    	if(null!=controller)controller.removeOnPlayVideoListener(this);
-    }
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (null != controller)
+			controller.removeOnPlayVideoListener(this);
+	}
 
-    @Override
-    public void onVideoInfo(VDVideoInfo info) {
-        // TODO Auto-generated method stub
-        setText(info.mDescription);
-    }
+	@Override
+	public void onVideoInfo(VDVideoInfo info) {
+		// TODO Auto-generated method stub
+		setText(info.mDescription);
+	}
 
-    @Override
-    public void onShowLoading(boolean show) {
-        // TODO Auto-generated method stub
+	@Override
+	public void onShowLoading(boolean show) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    @Override
-    public void onVideoPrepared(boolean prepare) {
-        // TODO Auto-generated method stub
+	@Override
+	public void onVideoPrepared(boolean prepare) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    @Override
-    public void onPlayStateChanged() {
-        // TODO Auto-generated method stub
+	@Override
+	public void onPlayStateChanged() {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
 }

@@ -26,8 +26,8 @@ import com.sina.video_playersdkv2.R;
  * @author liuqun
  * 
  */
-public class VDVideoResolutionButton extends TextView implements VDBaseWidget,
-		OnResolutionListener, OnShowHideControllerListener,
+public final class VDVideoResolutionButton extends TextView implements
+		VDBaseWidget, OnResolutionListener, OnShowHideControllerListener,
 		OnShowHideBottomControllerListener {
 
 	// private VDVideoResolutionList mVDVideoResolutionList;

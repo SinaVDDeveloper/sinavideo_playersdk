@@ -17,64 +17,67 @@ import com.sina.video_playersdkv2.R;
  * @author liuqun
  * 
  */
-public class VDVideoMoreOprationButton extends ImageButton implements VDBaseWidget {
+public final class VDVideoMoreOprationButton extends ImageButton implements
+		VDBaseWidget {
 
-    @SuppressLint("nouse")
-    private final static String TAG = "VDVideoRelatedButton";
-    @SuppressLint("nouse")
-    private Context mContext;
+	@SuppressLint("nouse")
+	private final static String TAG = "VDVideoRelatedButton";
+	@SuppressLint("nouse")
+	private Context mContext;
 
-    public VDVideoMoreOprationButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        mContext = context;
-        TypedArray typedArr = context.obtainStyledAttributes(attrs, new int[]{android.R.attr.background});
-        if (typedArr != null) {
-            int resouceID = typedArr.getResourceId(0, -1);
-            if (resouceID == -1) {
-                setBackgroundResource(R.drawable.more);
-            }
-            typedArr.recycle();
-        } else {
-            setBackgroundResource(R.drawable.more);
-        }
+	public VDVideoMoreOprationButton(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		mContext = context;
+		TypedArray typedArr = context.obtainStyledAttributes(attrs,
+				new int[] { android.R.attr.background });
+		if (typedArr != null) {
+			int resouceID = typedArr.getResourceId(0, -1);
+			if (resouceID == -1) {
+				setBackgroundResource(R.drawable.more);
+			}
+			typedArr.recycle();
+		} else {
+			setBackgroundResource(R.drawable.more);
+		}
 
-        registerListeners();
-    }
+		registerListeners();
+	}
 
-    public VDVideoMoreOprationButton(Context context) {
-        super(context);
-        mContext = context;
-        registerListeners();
-    }
+	public VDVideoMoreOprationButton(Context context) {
+		super(context);
+		mContext = context;
+		registerListeners();
+	}
 
-    /**
-     * 为自己注册事件
-     */
-    private void registerListeners() {
-        // click事件
-        this.setOnClickListener(new OnClickListener() {
+	/**
+	 * 为自己注册事件
+	 */
+	private void registerListeners() {
+		// click事件
+		this.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                VDVideoViewController controller = VDVideoViewController.getInstance(VDVideoMoreOprationButton.this
-                        .getContext());
-                if (controller != null)
-                    controller.notifyHideControllerBar(0);
-                if (controller != null)
-                    controller.notifyShowMoreOprationPanel();
-            }
+			@Override
+			public void onClick(View v) {
+				VDVideoViewController controller = VDVideoViewController
+						.getInstance(VDVideoMoreOprationButton.this
+								.getContext());
+				if (controller != null)
+					controller.notifyHideControllerBar(0);
+				if (controller != null)
+					controller.notifyShowMoreOprationPanel();
+			}
 
-        });
+		});
 
-    }
+	}
 
-    @Override
-    public void reset() {
+	@Override
+	public void reset() {
 
-    }
+	}
 
-    @Override
-    public void hide() {
-    }
+	@Override
+	public void hide() {
+	}
 
 }

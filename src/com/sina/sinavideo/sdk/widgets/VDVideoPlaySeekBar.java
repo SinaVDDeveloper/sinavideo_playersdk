@@ -18,7 +18,7 @@ import com.sina.video_playersdkv2.R;
  * @author liuqun
  * 
  */
-public class VDVideoPlaySeekBar extends SeekBar implements VDBaseWidget,
+public final class VDVideoPlaySeekBar extends SeekBar implements VDBaseWidget,
 		VDVideoViewListeners.OnProgressUpdateListener,
 		SeekBar.OnSeekBarChangeListener,
 		VDVideoViewListeners.OnBufferingUpdateListener {

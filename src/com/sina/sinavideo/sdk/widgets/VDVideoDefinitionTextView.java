@@ -19,7 +19,7 @@ import com.sina.video_playersdkv2.R;
  * @deprecated 使用VDVideoResolutionListButton代替
  * @author seven
  */
-public class VDVideoDefinitionTextView extends TextView implements
+public final class VDVideoDefinitionTextView extends TextView implements
 		VDBaseWidget, OnVMSResolutionListener {
 
 	private Context mContext = null;
