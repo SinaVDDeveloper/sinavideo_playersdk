@@ -22,10 +22,12 @@ public class VDPlayPauseHelper {
 		// 先测试添加于此
 		if (controller.mVDPlayerInfo.mIsPlaying) {
 			controller.pause();
+			if (controller.isCanShowFrameAD()) {
+				controller.notifyVideoFrameADBegin();
+			}
 		} else {
 			controller.resume();
 			controller.start();
 		}
 	}
-
 }
