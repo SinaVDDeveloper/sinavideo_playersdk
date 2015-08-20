@@ -941,7 +941,7 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 	 * 
 	 * @return
 	 */
-	private boolean isCanShowFrameAD() {
+	public boolean isCanShowFrameAD() {
 		// 1、用户点击暂停
 		if (mWhereTopause == 0 && ((mADConfigEnum & 1) == 1))
 			return true;
@@ -972,9 +972,9 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 
 		pauseInsertAD();
 
-		if (isCanShowFrameAD()) {
-			mListeners.notifyVideoFrameADBegin();
-		}
+		// if (isCanShowFrameAD()) {
+		// mListeners.notifyVideoFrameADBegin();
+		// }
 	}
 
 	private void pauseInsertAD() {
@@ -1527,6 +1527,15 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 	 */
 	public void notifyHideVideoList() {
 		mListeners.notifyHideVideoList();
+	}
+
+	/**
+	 * 显示静帧广告
+	 */
+	public void notifyVideoFrameADBegin() {
+		if (mListeners != null) {
+			mListeners.notifyVideoFrameADBegin();
+		}
 	}
 
 	public void notifyRemoveAndHideDelayVideoList() {

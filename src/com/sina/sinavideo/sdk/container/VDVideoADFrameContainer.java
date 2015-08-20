@@ -31,23 +31,32 @@ public class VDVideoADFrameContainer extends RelativeLayout implements
 				adEnum = typedArray.getInt(i, 1);
 			}
 		}
-		VDVideoViewController controller = VDVideoViewController.getInstance(context);
-		if(null!=controller)controller.mADConfigEnum = adEnum;
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(context);
+		if (null != controller)
+			controller.mADConfigEnum = adEnum;
 		typedArray.recycle();
 	}
 
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
-		VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-		if(controller!=null)controller.addOnVideoFrameADListener(this);
+		VDVideoViewController controller = VDVideoViewController
+				.getInstance(this.getContext());
+		if (controller != null)
+			controller.addOnVideoFrameADListener(this);
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		VDVideoViewController controller = VDVideoViewController.getInstance(this.getContext());
-		if(controller!=null)controller.removeOnVideoFrameADListener(this);
+
+		// when both vertical and horizon screen has the FrameADContainer,remove
+		// listener may cause another container cant receiver the event.
+
+		// VDVideoViewController controller =
+		// VDVideoViewController.getInstance(this.getContext());
+		// if(controller!=null)controller.removeOnVideoFrameADListener(this);
 	}
 
 	@Override
