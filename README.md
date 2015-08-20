@@ -44,15 +44,46 @@ QQ群号：414552747，作者们都在，有事儿进群说
 VDVideoView是提供给客户端用的，客户端只需使用VDVideoView就能完成视频的播放的功能；VDVideoView封装了视频播放的View和 控制层UI，提供了横竖屏切换和播放视频的接口。
 其中 layerAttrs属性用于设置小屏和全屏的播放器控制层UI。
 
-open(Context context, ArrayList<VDVideoInfo> pathList)  该方法用于设置视频列表。
+####控制部分
 
-play(int index)， 该方法用于播放视频列表里的第几个视频
+open(Context context, VDVideoListInfo infoList)  该方法用于设置视频列表。
+
+open(Context context, VDVideoInfo path) 简化版，设置单视频
+
+play(int index)， 该方法用于播放视频列表里的第index个视频
+
+play(int index, long position)， 播放第index个视频，并且从position开始，position为毫秒
 
 setIsFullScreen(boolean isFullScreen) 该方法用来设置全屏或小屏
 
 stop() 该方法停止播放视频
 
-release() 该方法销毁播放器
+release(boolean isOnlyReloadVideo) 该方法销毁播放器
+
+####activity回调部分
+
+基本与activity使用同名函数，默认onResume使用暂停方式提供，即：onPause->onStop->onResume调用链后，当前视频是在暂停状态的
+
+####其他部分，包括广告等
+
+getIsPlaying() 是否播放中
+
+getPlayerStatus() 播放器当前状态[getIsPlaying的复杂版，能得到更多状态]
+
+VDVideoListInfo getListInfo() 拿到当前的播放列表
+
+setLayers(int resourceID) 手动加载layer，用于在一些无法写layout xml的场合，比如列表播放的时候
+
+setExternalFullContainer(ViewGroup vg)
+	设置父容器，用来做全屏转换<br />
+	有时候，播放器会嵌入到很奇怪的vg中，比如：fragment等<br/>
+	默认，SDK会自己寻找decoreView为父类容器<br />
+	但在特殊情况下，找到的decoreView不是正确的父容器，这时候需要手工指定
+	
+refreshInsertADList(List<VDVideoInfo> insertADList,
+			VDVideoInfo currInfo)
+			
+播放中，加入新的广告贴片，一般用在点击播放列表的时候。
 
 ###VDVideoInfoList
 
@@ -64,11 +95,19 @@ release() 该方法销毁播放器
 
 ###***widgets***
 
-详细的参考：doc/使用说明书
+详细的参考：【还没写完】
 
 ###***containers***
 
-详细的参考：doc/使用说明书
+详细的参考：【还没写完】
+
+###***VDVideoExtListeners***
+
+外部事件封装，app端的activity有时候需要得到播放器的一些事件回调。这个时候就需要用到外部listener类
+
+通过VDVideoView中的set***Listener函数族来注册事件，并且在activity中的implement来进行回调。
+
+具体用法参见demo中的例子。
 
 ##一些提示
 ###我如何安排集成播放器的开发节奏？

@@ -518,9 +518,10 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	}
 
 	/**
-	 * 设置外界事件<br>
-	 * 事件分为外部与内部之分，外部事件，包含：<br>
-	 * 广告部分，播放列表点击等无法在内部流转实现，或者是内部实现比较复杂，可能出现问题的事件处理
+	 * 设置父容器，用来做全屏转换<br />
+	 * 有时候，播放器会嵌入到很奇怪的vg中，比如：fragment等<br/>
+	 * 默认，SDK会自己寻找decoreView为父类容器<br />
+	 * 但在特殊情况下，找到的decoreView不是正确的父容器，这时候需要手工指定
 	 * 
 	 * @param vg
 	 */
