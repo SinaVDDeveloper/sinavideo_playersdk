@@ -1001,17 +1001,7 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 	 * 继续
 	 */
 	public void resume() {
-		if (mVideoView != null) {
-			mVideoView.resume();
-			startUpdateMessage();
-		}
-		updatePlayState();
-		VDVideoFullModeController.getInstance().enableSensor(true);
-
-		resumeInsertAD();
-
-		mListeners.notifyVideoFrameADEnd();
-		mVDPlayerInfo.mPlayStatus = VDPlayerInfo.PLAYER_RESUME;
+		resume(true);
 	}
 
 	/**
@@ -1028,7 +1018,8 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 			startUpdateMessage();
 		}
 		updatePlayState();
-
+		VDVideoFullModeController.getInstance().enableSensor(true);
+		
 		resumeInsertAD();
 
 		mListeners.notifyVideoFrameADEnd();

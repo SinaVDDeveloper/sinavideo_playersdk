@@ -501,10 +501,13 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	 * 手动结束
 	 */
 	public void stop() {
-		VDVideoViewController cnotroller = VDVideoViewController
+		VDVideoViewController controller = VDVideoViewController
 				.getInstance(mContext);
-		if (null != cnotroller)
-			cnotroller.stop();
+		if (null != controller) {
+			controller.pause();
+			controller.stop();
+		}
+
 	}
 
 	/**
@@ -606,10 +609,6 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 		}
 
 		if (mVideoFullScreenContainer.getParent() == null) {
-			// container.addView(mVideoFullScreenContainer,
-			// ViewGroup.LayoutParams.MATCH_PARENT,
-			// ViewGroup.LayoutParams.MATCH_PARENT);
-			// 将全屏控件提升到最顶上的viewgroup里面
 			changeToRoot(mVideoFullScreenContainer);
 		}
 		VDVideoViewController controller = VDVideoViewController
@@ -653,10 +652,6 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 		}
 		mVideoView.endChangeParentView();
 		mVideoView.requestVideoLayout();
-		// if (prePlayerStatus != VDPlayerInfo.PLAYER_PAUSING) {
-		// VDVideoViewController.getInstance().setScreenOrientationPause(false);
-		// VDVideoViewController.getInstance().resume();
-		// }
 	}
 
 	/**
@@ -724,17 +719,6 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 		}
 	}
 
-	/**
-	 * 当前所有的layers都重新按照状态值来一遍
-	 */
-	// public void reset() {
-	// for (VDVideoViewLayerContext item : mVDVideoViewLayerData.getLayerList())
-	// {
-	// item.refresh(VDVideoViewController.getInstance().isInsertAD());
-	// item.reset();
-	// }
-	// }
-
 	// ---------------私有函数---------------
 
 	/**
@@ -751,9 +735,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 			lp.gravity = Gravity.CENTER;
 			addView((VideoViewHard) vv, 0, lp);
-			// addView((VideoViewHard) vv, 0);
 		} else {
-			// addView((VideoView) vv, 0);
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 			lp.gravity = Gravity.CENTER;
 			addView((VideoView) vv, 0, lp);
@@ -1029,9 +1011,6 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
 			controller.notifyKeyLeftRightEvent();
-			// VDVideoViewController.getInstance().touchScreenSingleEvent(null,
-			// eSingleTouchListener.eTouchListenerSingleTouch);
-			// VDVideoViewController.getInstance().notifyPlayOrPause();
 			Log.i(TAG, "onKeyDown KEYCODE_DPAD_RIGHT  = " + keyCode);
 			if (info.mIsLive) {
 
