@@ -1019,7 +1019,7 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 		}
 		updatePlayState();
 		VDVideoFullModeController.getInstance().enableSensor(true);
-		
+
 		resumeInsertAD();
 
 		mListeners.notifyVideoFrameADEnd();
@@ -2889,6 +2889,7 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 
 	@Override
 	public boolean onError(MediaPlayer mp, int what, int extra) {
+		VDLog.e(TAG, "onError:errorCode1:" + what + ",errorCodeExtra:" + extra);
 		if (getCurrentVideo() != null) {
 			if (getCurrentVideo().mIsInsertAD) {
 				mInsertADHandler.removeCallbacks(mInsertADRunnable);
