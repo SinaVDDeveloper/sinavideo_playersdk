@@ -110,7 +110,7 @@ public class M3u8ContentParser {
 			VDResolutionData resolutionData = null;
 			VDResolutionData.VDResolution resolution = null;
 			String line = null;
-			int idx = 0;
+			// int idx = 0;
 			int resolutionCount = 0;
 			String resolutionTag = VDResolutionData.TYPE_DEFINITION_SD;
 			while ((line = br.readLine()) != null) {
@@ -137,7 +137,7 @@ public class M3u8ContentParser {
 					if (bandWidth != null) {
 						resolution.setBandWidth(Integer.valueOf(bandWidth));
 					}
-					idx++;
+					// idx++;
 					resolutionCount++;
 				} else if (line.startsWith("http://")) {
 					if (m3u8Type == M3u8Content.M3U8_TYPE_RESOLUTION
@@ -149,7 +149,7 @@ public class M3u8ContentParser {
 						resolutionData.addResolution(resolution);
 						resolution = null;
 					}
-					idx++;
+					// idx++;
 				} else {
 					resolution = null;
 				}
