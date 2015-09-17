@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -696,6 +697,27 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 		}
 	}
 
+	@SuppressLint("NewApi")
+	private void setVirtualButtonVisible(boolean isVisible) {
+		if (mContext == null) {
+			return;
+		}
+		int version = android.os.Build.VERSION.SDK_INT;
+		if (version < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+			// 小于3.0版本，那么直接退出
+			return;
+		}
+		Window window = ((Activity) mContext).getWindow();
+
+		if (isVisible) {
+			window.getDecorView().setSystemUiVisibility(
+					View.SYSTEM_UI_FLAG_VISIBLE);
+		} else {
+			window.getDecorView().setSystemUiVisibility(
+					View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+		}
+	}
+
 	/**
 	 * 横竖屏切换，从onConfigurationChanged入口进来的
 	 * 
@@ -703,6 +725,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	 *            true 表全屏；false 表非全屏
 	 */
 	public void setIsFullScreen(boolean isFullScreen) {
+		setVirtualButtonVisible(!isFullScreen);
 		setIsFullScreen(isFullScreen, false);
 	}
 

@@ -31,6 +31,7 @@ import org.apache.http.protocol.HTTP;
 
 import com.sina.sinavideo.coreplayer.util.LogS;
 import com.sina.sinavideo.sdk.data.VDResolutionData;
+import com.sina.sinavideo.sdk.utils.VDLog;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -113,6 +114,7 @@ public class M3u8ContentParser {
 			int resolutionCount = 0;
 			String resolutionTag = VDResolutionData.TYPE_DEFINITION_SD;
 			while ((line = br.readLine()) != null) {
+				VDLog.d(TAG, line);
 				if (line.startsWith("#EXT-X-STREAM-INF")) {
 					m3u8Type = M3u8Content.M3U8_TYPE_RESOLUTION;
 					resolution = new VDResolutionData.VDResolution();
@@ -153,9 +155,9 @@ public class M3u8ContentParser {
 				}
 			}
 
-			if (idx == 0) {
-				mListener.onError(ERROR_NO_CONTENT);
-			}
+			// if (idx == 0) {
+			// mListener.onError(ERROR_NO_CONTENT);
+			// }
 			if (m3u8Type == M3u8Content.M3U8_TYPE_RESOLUTION
 					&& resolutionData != null) {
 				return resolutionData;
