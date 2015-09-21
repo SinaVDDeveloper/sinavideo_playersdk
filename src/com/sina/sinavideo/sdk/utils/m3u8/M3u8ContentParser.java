@@ -46,24 +46,18 @@ public class M3u8ContentParser {
 
 	private static final String TAG = "M3u8ContentParser";
 	private static HttpClient sHttpClient;
+	private M3u8AsyncTask mTask = null;
 
 	private static final int CONNETED_TIMEOUT = 5;
 	private static final int RETRY_TIMES = 5;
-
-	// private LogPushManager mLogPushManager;
-	// private String vid;
-	// private Context mContext;
 
 	public M3u8ContentParser(M3u8ParserListener listener, String _vid,
 			Context ctt) {
 		mListener = listener;
 		mListener.updateVideoID(_vid);
-		// vid = _vid;
 		if (sHttpClient == null) {
 			sHttpClient = createHttpClient();
 		}
-		// mContext = ctt;
-		// mLogPushManager = PlayerSDKProxy.getLogPushManager();
 	}
 
 	private M3u8ParserListener mListener;
@@ -90,8 +84,14 @@ public class M3u8ContentParser {
 
 	public void startParserM3u8(String url) {
 		mListener.updateVideoPlayUrl(url);
-		M3u8AsyncTask task = new M3u8AsyncTask(url);
-		task.execute();
+		mTask = new M3u8AsyncTask(url);
+		mTask.execute();
+	}
+
+	public void cancelParserM3U8() {
+		if (mTask != null && mTask.getStatus() != AsyncTask.Status.FINISHED) {
+			mTask.cancel(true);
+		}
 	}
 
 	private VDResolutionData parse(InputStream is) {
@@ -214,6 +214,7 @@ public class M3u8ContentParser {
 		}
 
 		private VDResolutionData retryConnect() {
+			int retryTimes = 0;
 			for (int i = 0; i < RETRY_TIMES; i++) {
 				LogS.d(TAG, "Retry time " + (i + 1));
 
@@ -222,8 +223,6 @@ public class M3u8ContentParser {
 					LogS.d(TAG, "parse url " + mUrl);
 
 					request = new HttpGet(mUrl);
-					request.addHeader("User-Agent",
-							"sinavideo/2.0.1 CFNetwork/672.0.2 Darwin/14.0.0");
 					request.setHeader("Accept-Encoding", "gzip, deflate");
 					request.setHeader("Accept-Language", "zh-cn");
 					request.setHeader("Accept", "*/*");
@@ -248,8 +247,10 @@ public class M3u8ContentParser {
 					LogS.e(TAG, "ClientProtocolException " + e);
 					e.printStackTrace();
 				} catch (ConnectTimeoutException e) {
+					// 如果是timeout，那么重试RETRY_TIMES次，失败了，就代表挂了。
 					LogS.e(TAG, "ConnectTimeoutException " + e);
 					e.printStackTrace();
+					retryTimes++;
 				} catch (ConnectException e) {
 					LogS.e(TAG, "ConnectException " + e);
 					e.printStackTrace();
@@ -265,6 +266,12 @@ public class M3u8ContentParser {
 					return null; // 出错了就返回错误，不继续连接
 				} finally {
 				}
+			}
+
+			if (retryTimes >= 5) {
+				mListener.onError(ERROR_PARSE);
+				LogS.e(TAG, "parse error");
+				return null; // 提示错误
 			}
 
 			return new VDResolutionData(); // 返回原地址
