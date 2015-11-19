@@ -1,4 +1,5 @@
-
+project.properties
+gen
 *.i
 
 *.txt
@@ -58,3 +59,77 @@ doc/用户手册/播放器层次结构图.graffle
 gen/com/sina/video_playersdkv2/BuildConfig.java
 
 gen/com/sina/video_playersdkv2/R.java
+
+#From https://github.com/ReactiveX/RxAndroid/blob/master/.gitignore
+
+# Compiled source #
+###################
+*.class
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Editor Files #
+################
+*~
+*.swp
+
+# Gradle Files #
+################
+.gradle
+.gradletasknamecache
+.m2
+
+# Build output directies
+target/
+build/
+
+# IntelliJ specific files/directories
+out
+.idea
+*.ipr
+*.iws
+*.iml
+atlassian-ide-plugin.xml
+
+# AndroidStudio specific files/directories
+local.properties
+
+# Eclipse specific files/directories
+.classpath
+.project
+.settings
+.metadata
+bin/
+
+# NetBeans specific files/directories
+.nbattrs
+/.nb-gradle/profiles/private/
+.nb-gradle-properties
+
+# Android
+local.properties
+
+# jEnv
+.java-version
+

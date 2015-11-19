@@ -1,11 +1,6 @@
 package com.sina.sinavideo.sdk;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -35,8 +30,8 @@ import com.sina.sinavideo.coreplayer.splayer.MediaPlayer.OnSeekCompleteListener;
 import com.sina.sinavideo.coreplayer.splayer.MediaPlayer.OnTimedTextListener;
 import com.sina.sinavideo.coreplayer.splayer.MediaPlayer.OnVideoOpenedListener;
 import com.sina.sinavideo.coreplayer.splayer.MediaPlayer.OnVideoSizeChangedListener;
+import com.sina.sinavideo.coreplayer.splayer.TextureVideoView;
 import com.sina.sinavideo.coreplayer.splayer.VideoView;
-import com.sina.sinavideo.coreplayer.splayer.VideoViewHard;
 import com.sina.sinavideo.sdk.VDVideoConfig.eVDDecodingType;
 import com.sina.sinavideo.sdk.VDVideoViewListeners.OnClickPlayListener;
 import com.sina.sinavideo.sdk.VDVideoViewListeners.OnClickRetryListener;
@@ -86,6 +81,12 @@ import com.sina.sinavideo.sdk.utils.VDVideoScreenOrientation;
 import com.sina.sinavideo.sdk.utils.m3u8.M3u8ContentParser;
 import com.sina.sinavideo.sdk.utils.m3u8.M3u8ContentParser.M3u8ParserListener;
 import com.sina.video_playersdkv2.R;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 控制类，使用引用方式调用CorePlayer中的MediaController<br>
@@ -571,15 +572,18 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 
 		// 初始化转屏部分
 		VDVideoFullModeController.getInstance().init(context);
+		
 		if (VDVideoConfig.mDecodingType == eVDDecodingType.eVDDecodingTypeSoft) {
-			controller.mVideoView = new VideoView(context);
+			controller.mVideoView = new TextureVideoView(context);
 		} else if (VDVideoConfig.mDecodingType == eVDDecodingType.eVDDecodingTypeHardWare) {
-			controller.mVideoView = new VideoViewHard(context);
+//			controller.mVideoView = new VideoViewHard(context);
+			controller.mVideoView = new TextureVideoView(context);
 		} else {
 			if (VDSharedPreferencesUtil.isDecodingTypeFFMpeg(context)) {
-				controller.mVideoView = new VideoView(context);
+				controller.mVideoView = new TextureVideoView(context);
 			} else {
-				controller.mVideoView = new VideoViewHard(context);
+//				controller.mVideoView = new VideoViewHard(context);
+				controller.mVideoView = new TextureVideoView(context);
 			}
 		}
 
@@ -3073,10 +3077,11 @@ public class VDVideoViewController implements OnVideoOpenedListener,
 	 * @param isVisible
 	 *            eg:VISIBLE, INVISIBLE, or GONE.
 	 */
+	@SuppressLint("NewApi")
 	private void setVideoViewVisible(int isVisible) {
 		if (mVideoView != null) {
-			if (mVideoView instanceof VideoViewHard) {
-				((VideoViewHard) mVideoView).setVisibility(isVisible);
+			if (mVideoView instanceof TextureVideoView) {
+				((TextureVideoView) mVideoView).setVisibility(isVisible);
 			} else {
 				((VideoView) mVideoView).setVisibility(isVisible);
 			}
