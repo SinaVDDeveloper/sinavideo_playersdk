@@ -1,6 +1,6 @@
 # sinavideo_playersdk
 
-**内核开源了，参考splayer以及dlna项目!!!
+**内核开源了，参考splayer以及dlna项目!!!**
 
 ##郑重声明
 
