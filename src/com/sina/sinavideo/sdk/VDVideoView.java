@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.sina.sinavideo.coreplayer.ISinaVideoView;
+import com.sina.sinavideo.coreplayer.splayer.TextureVideoView;
 import com.sina.sinavideo.coreplayer.splayer.VideoView;
 import com.sina.sinavideo.coreplayer.splayer.VideoViewHard;
 import com.sina.sinavideo.dlna.SinaDLNA;
@@ -754,10 +755,10 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 			return;
 		}
 		setBackgroundColor(Color.BLACK);
-		if (vv instanceof VideoViewHard) {
+		if (vv instanceof TextureVideoView) {
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 			lp.gravity = Gravity.CENTER;
-			addView((VideoViewHard) vv, 0, lp);
+			addView((TextureVideoView) vv, 0, lp);
 		} else {
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-1, -1);
 			lp.gravity = Gravity.CENTER;
